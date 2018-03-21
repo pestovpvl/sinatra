@@ -124,7 +124,7 @@ values (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
 
 
 
-  erb "Ok, #{@username} ,  #{@phone} ,  #{@datetime} ,  #{@barber}"
+  erb "</br><h2>Success!</h2>"
 end
 
 
