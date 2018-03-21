@@ -22,10 +22,14 @@
           
           <br>
           <select name="barber" class="custom-select" >
-            <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
+     <!--       <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
             <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option value="1">
-            <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
-            
+            <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option> -->
+<% @barbers.each do |item| %>
+<option <%= @barber == item[1] ? 'selected' : '' %>><%=  item[1] %></option>
+          <% end %>
+
+
           </select>
          
         </div>
