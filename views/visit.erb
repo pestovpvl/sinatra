@@ -8,13 +8,13 @@
       <form action="/visit" method="post" role="form">
 
         <div class="form-group">
-          <input name="username" type="text" class="form-control" placeholder="Your Name">
+          <input name="username" type="text" class="form-control" placeholder="Your Name" value="<%=@username%>">
         </div>
         <div class="form-group">
-          <input name="phone" type="text" class="form-control" placeholder="Your Phone Number">
+          <input name="phone" type="text" class="form-control" placeholder="Your Phone Number" value="<%=@phone%>">
         </div>
         <div class="form-group">
-          <input name="datetime" type="text" class="form-control" placeholder="Time for visit">
+          <input name="datetime" type="text" class="form-control" placeholder="Time for visit" value="<%=@datetime%>">
         </div>
 
 <p>Choise, your nail master </p>
@@ -22,9 +22,9 @@
           
           <br>
           <select name="barber" class="custom-select" >
-            <option selected>Jessie Pinkman</option>
-            <option value="1">Walter White</option>
-            <option value="2">Gus Fring</option>
+            <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
+            <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option value="1">
+            <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
             
           </select>
          

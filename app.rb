@@ -1,9 +1,27 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+def get_db
+  return SQLite3::Database.new 'barbershop.db'
+  db.results_as_hash = true
+  return db
+end
 
 configure do
-  enable :sessions
+ db = get_db
+
+db.execute 'CREATE TABLE IF NOT EXISTS
+              "Users"
+   (
+     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+     "username" TEXT,
+     "phone" TEXT,
+  "datestamp" TEXT,
+   "barber" TEXT,
+   "color" TEXT
+ )'
 end
 
 helpers do
@@ -36,23 +54,58 @@ get '/visit' do
   erb :visit
 end
 
+get '/contact' do
+  erb :contact
+end
+
+
 post '/visit' do
   @username = params[:username]
   @phone = params[:phone]
   @datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
-  erb "#{@username}, #{@phone}, #{@datetime}, #{@barber}, #{@color}"
-
-  if @username == ''
-    @error = "Please, input your name"
-    return erb :visit
-  end
 
 
 
 
+  hh = {
+      :username => "Your name",
+      :phone => "Your phone",
+      :datetime => "Data"
+  }
+
+  @error = hh.select{|key,_| params[key] == ""}.values.join(", ")
+
+   if @error != ""
+     return erb :visit
+   end
+
+db = get_db
+  db.execute 'insert into
+             Users
+(
+username,
+phone,
+datestamp,
+barber,
+color
+)
+values (?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+
+
+
+  erb "Ok, #{@username} ,  #{@phone} ,  #{@datetime} ,  #{@barber}"
 end
+
+
+
+
+
+
+
+
+
 
 
 post '/login/attempt' do
@@ -68,4 +121,9 @@ end
 
 get '/secure/place' do
   erb 'This is a secret place that only <%=session[:identity]%> has access to!'
+end
+
+
+get '/contact' do
+  "Hello World"
 end
