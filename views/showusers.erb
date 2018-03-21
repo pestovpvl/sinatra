@@ -1,0 +1,27 @@
+
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Phone</th>
+    <th scope="col">DateTime</th>
+    <th scope="col">Master</th>
+    <th scope="col">Color</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @results.each do |row| %>
+    <tr>
+      <td><%= row[0] %></td>
+      <td><%= row[1] %></td>
+      <td><%= row[2] %></td>
+      <td><%= row[3] %></td>
+      <td><%= row[4] %></td>
+      <td><%= row[5] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
